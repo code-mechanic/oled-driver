@@ -10,3 +10,7 @@
 	path = library/printf
 	url = https://github.com/binarymaker/embedded-printf.git
 	branch = library
+[submodule "library/avr-atmega-driver"]
+	path = library/avr-atmega-driver
+	url = https://github.com/binarymaker/avr-atmega-driver.git
+	branch = library
