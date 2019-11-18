@@ -82,6 +82,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>../../source/oled-display.c</itemPath>
       <itemPath>../../source/oled-display.h</itemPath>
+      <itemPath>../../source/font.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

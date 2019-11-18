@@ -34,6 +34,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "oled-display-cfg.h"
+#include "font.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -44,6 +45,12 @@ OLEDDISPLAY_Init();
 
 void 
 OLEDDISAPLY_FillScreen(uint8_t pattern);
+
+void 
+OLEDDISPLAY_SetPointer(uint8_t seg, uint8_t pag);
+
+void 
+OLEDDISPLAY_WriteChar(uint8_t ch);
 
 #ifdef __cplusplus
 }

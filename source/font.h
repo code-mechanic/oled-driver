@@ -18,27 +18,35 @@
   ******************************************************************************
   \endcond*/
 
-/* Includes ------------------------------------------------------------------*/
-#include "mcu.h"
-#include "oled-display.h"
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+#ifndef FONT_cfc6d5d8_09e2_11ea_9d84_705a0f25cb51
+#define FONT_cfc6d5d8_09e2_11ea_9d84_705a0f25cb51
 
-int
-main(void)
-{
-  MCU_Init();
-  OLEDDISPLAY_Init();
-  uint8_t count = 0;
-  while(1)
-  {
-    OLEDDISPLAY_SetPointer(0, 0);
-    OLEDDISPLAY_WriteChar('A');
-    DELAY_sec(1);
-  }
-  return 0;
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+/**
+ * \brief Source file version tag
+ *        
+ *        version info: [15:8] main [7:0] beta
+ */
+#define __FONT_VERSION      (0x0001u)
+
+/* Includes ------------------------------------------------------------------*/
+#include <avr/pgmspace.h>
+/* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
+
+
+
+
+/* Exported macro ------------------------------------------------------------*/
+/* Exported functions ------------------------------------------------------- */
+
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* FONT_cfc6d5d8_09e2_11ea_9d84_705a0f25cb51 */
+
