@@ -34,11 +34,17 @@ main(void)
   MCU_Init();
   OLEDDISPLAY_Init();
   uint8_t count = 0;
-  OLEDDISPLAY_FontSelect(Font_6x8, 6, 8, 32, 127);
+  char buf[10];
+ // OLEDDISPLAY_FontSelect(Font_6x8, 6, 8, 32, 127);
+  OLEDDISPLAY_FontSelect(Segment_25x40, 25, 40, 46, 58);
   while(1)
   {
     OLEDDISPLAY_SetPointer(0, 0);
-    OLEDDISPLAY_WriteString("binarymaker");        
+    PRINT_IntegerToAscii(count, buf, 10, 0, 0);
+    USART_Printf("%s",buf);
+    OLEDDISPLAY_WriteString(buf); 
+    DELAY_ms(100);
+    count++;
   }
   return 0;
 }
