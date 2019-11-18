@@ -18,30 +18,24 @@
   ******************************************************************************
   \endcond*/
 
+#ifndef OLED_DISPLAY_4948eba8_060b_11ea_a4e3_705a0f25cb51
+#define OLED_DISPLAY_4948eba8_060b_11ea_a4e3_705a0f25cb51
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 /* Includes ------------------------------------------------------------------*/
 #include "mcu.h"
-#include "oled-display.h"
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+/* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
+/* Exported macro ------------------------------------------------------------*/
+/* Exported functions ------------------------------------------------------- */
 
-int
-main(void)
-{
-  MCU_Init();
-  OLEDDISPLAY_Init();
-  uint8_t count = 0;
-  while(1)
-  {
-    OLEDDISAPLY_FillScreen(BIT_MaskFill(count++));
-    if(count > 8)
-    {
-      count = 0;
-    }
-    DELAY_sec(1);
-  }
-  return 0;
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* OLED_DISPLAY_4948eba8_060b_11ea_a4e3_705a0f25cb51 */
+

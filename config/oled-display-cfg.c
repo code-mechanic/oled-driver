@@ -19,8 +19,6 @@
   \endcond*/
 
 /* Includes ------------------------------------------------------------------*/
-#include "mcu.h"
-#include "oled-display.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -28,20 +26,3 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
-int
-main(void)
-{
-  MCU_Init();
-  OLEDDISPLAY_Init();
-  uint8_t count = 0;
-  while(1)
-  {
-    OLEDDISAPLY_FillScreen(BIT_MaskFill(count++));
-    if(count > 8)
-    {
-      count = 0;
-    }
-    DELAY_sec(1);
-  }
-  return 0;
-}
