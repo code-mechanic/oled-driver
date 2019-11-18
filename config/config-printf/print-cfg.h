@@ -31,6 +31,7 @@
 typedef enum
 {
     PRINT_CHANNEL_BUFFER,
+    PRINT_CHANNEL_USART,
     NUM_PRINT_CHANNEL       
 } PrintChannel_et;
 /* Exported constants --------------------------------------------------------*/

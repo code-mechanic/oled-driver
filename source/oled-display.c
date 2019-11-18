@@ -22,12 +22,23 @@
 #include "oled-display.h"
 #include "font.h"
 #include "stdint.h"
+#include "usart.h"
 /* Private typedef -----------------------------------------------------------*/
 typedef enum
 {
   OLEDDIAPLY_MODE_COMMAND,
   OLEDDISAPLY_MODE_RAMDATA
 }oledDisplayMode_et;
+
+struct fontInfo_s
+{
+  const unsigned char* font; 
+  uint8_t width;
+  uint8_t height;
+  uint8_t startChar;
+  uint8_t endChar;
+}fontInfo;
+
 /* Private define ------------------------------------------------------------*/
 #define OLED_12C_ADDRESS    0x7A 
 /* Private macro -------------------------------------------------------------*/
@@ -226,26 +237,54 @@ OLEDDISPLAY_FillScreen(uint8_t pattern)
     OLEDDISPLAY_TransferMode(OLEDDISAPLY_MODE_RAMDATA);
     for(seg = 0; seg < 128; seg++)
     {
-      pattern = pgm_read_byte(&Font_6x8[seg]);
       OLEDDIPLAY_Transfer(pattern);
     }
     OLEDDIPLAY_TransferEnd();
   }
 }
 
+
+void
+OLEDDISPLAY_FontSelect(const unsigned char* font, 
+                       uint8_t width, 
+                       uint8_t height,
+                       uint8_t startChar,
+                       uint8_t endChar
+                      )
+{
+  fontInfo.font = font;
+  fontInfo.width = width;
+  fontInfo.height = height / 8;
+  fontInfo.startChar = startChar;
+  fontInfo.endChar = endChar;
+}
+
 void 
-OLEDDISPLAY_WriteChar(uint8_t ch)
+OLEDDISPLAY_WriteChar(char ch)
 {
   uint8_t charSeg;
-  uint8_t charLocation;
+  uint8_t segPattern;
+  uint16_t charLocation;
   
-  charLocation = (ch - ' ') * 6;
+  charLocation = (ch - fontInfo.startChar) * (fontInfo.width * fontInfo.height);
+  
   OLEDDISPLAY_TransferMode(OLEDDISAPLY_MODE_RAMDATA);
-  for(charSeg = 0; charSeg < 6; charSeg++)
+  for(charSeg = 0; charSeg < fontInfo.width; charSeg++)
   {
-    ch = pgm_read_byte(&Font_6x8[charLocation+charSeg]);
-    OLEDDIPLAY_Transfer(ch);
+    segPattern = pgm_read_byte(&fontInfo.font[charLocation+charSeg]);
+    OLEDDIPLAY_Transfer(segPattern);
   }
   OLEDDIPLAY_TransferEnd();
+}
+
+void
+OLEDDISPLAY_WriteString(char* str)
+{
+  uint8_t ch = 0;
   
+  while(str[ch] != '\0')
+  {
+    OLEDDISPLAY_WriteChar(str[ch]);
+    ch++;
+  }
 }

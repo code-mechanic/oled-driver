@@ -37,6 +37,7 @@
 #include "font.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+extern const unsigned char Font_6x8[];
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
@@ -49,8 +50,19 @@ OLEDDISAPLY_FillScreen(uint8_t pattern);
 void 
 OLEDDISPLAY_SetPointer(uint8_t seg, uint8_t pag);
 
+void
+OLEDDISPLAY_FontSelect(const unsigned char* font, 
+                       uint8_t width, 
+                       uint8_t height,
+                       uint8_t startChar,
+                       uint8_t endChar
+                      );
+
 void 
-OLEDDISPLAY_WriteChar(uint8_t ch);
+OLEDDISPLAY_WriteChar(char ch);
+
+void
+OLEDDISPLAY_WriteString(char* str);
 
 #ifdef __cplusplus
 }

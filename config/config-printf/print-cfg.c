@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "print-cfg.h"
 #include "stdint.h"
+#include "usart.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -42,6 +43,9 @@ PRINT_PutChar(char ch)
   {
     case PRINT_CHANNEL_BUFFER:
       PRINT_BufferWrite(ch);
+      break;
+    case PRINT_CHANNEL_USART:
+      USART_Write(ch);
       break;
     default:
       break;
