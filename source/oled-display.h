@@ -43,16 +43,16 @@ extern const unsigned char Segment_25x40[];
 /* Exported functions ------------------------------------------------------- */
 
 void
-OLEDDISPLAY_Init();
+OLED_DISPLAY_Init();
 
 void 
-OLEDDISAPLY_FillScreen(uint8_t pattern);
+OLED_DISAPLY_FillScreen(uint8_t pattern);
 
 void 
-OLEDDISPLAY_SetPointer(uint8_t seg, uint8_t pag);
+OLED_DISPLAY_SetPointer(uint8_t seg, uint8_t pag);
 
 void
-OLEDDISPLAY_FontSelect(const unsigned char* font, 
+OLED_DISPLAY_FontSelect(const unsigned char* font, 
                        uint8_t width, 
                        uint8_t height,
                        uint8_t startChar,
@@ -60,10 +60,10 @@ OLEDDISPLAY_FontSelect(const unsigned char* font,
                       );
 
 void 
-OLEDDISPLAY_WriteChar(char ch);
+OLED_DISPLAY_WriteChar(char ch);
 
 void
-OLEDDISPLAY_WriteString(char* str);
+OLED_DISPLAY_WriteString(char* str);
 
 #ifdef __cplusplus
 }
