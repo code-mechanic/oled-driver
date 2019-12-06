@@ -40,7 +40,7 @@ main(void)
   while(1)
   {
     OLED_DISPLAY_SetPointer(0, 0);
-    PRINT_IntegerToAscii(count, buf, 10, 0, 0);
+    PRINT_IntegerToAscii(count, buf, 10, 3, 0);
     USART_Printf("%s",buf);
     OLED_DISPLAY_WriteString(buf); 
     DELAY_ms(100);
