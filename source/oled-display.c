@@ -199,26 +199,26 @@ OLED_DISPLAY_Init()
   OLED_DISPLAY_TransferMode(OLEDDIAPLY_MODE_COMMAND);
   
   OLED_DISPLAY_Transfer(0xAE);                      // Set Display OFF
-  OLED_DISPLAY_Transfer(0x81);OLEDDISPLAY_Transfer(0xCF); // Set Contrast Control
+  OLED_DISPLAY_Transfer(0x81);OLED_DISPLAY_Transfer(0xCF); // Set Contrast Control
   OLED_DISPLAY_Transfer(0xA4);                     // Entire Display ON
   OLED_DISPLAY_Transfer(0xA6);                     // Set Normal
 
-  OLED_DISPLAY_Transfer(0x20); OLEDDISPLAY_Transfer(0x02); // Set Memory Addressing Mode
+  OLED_DISPLAY_Transfer(0x20); OLED_DISPLAY_Transfer(0x02); // Set Memory Addressing Mode
   OLED_DISPLAY_Transfer(0x00);                     // Set Lower Column
   OLED_DISPLAY_Transfer(0x10);                     // Set Higher Column
   OLED_DISPLAY_Transfer(0xB0);                     // Set Page Start
 
   OLED_DISPLAY_Transfer(0x40);                     // Set Display Start Line
   OLED_DISPLAY_Transfer(0xA1);                     // Set Segment Re-map
-  OLED_DISPLAY_Transfer(0xA8); OLEDDISPLAY_Transfer(0x3F); // Set Multiplex Ratio
+  OLED_DISPLAY_Transfer(0xA8); OLED_DISPLAY_Transfer(0x3F); // Set Multiplex Ratio
   OLED_DISPLAY_Transfer(0xC8);                     // Set COM Output
-  OLED_DISPLAY_Transfer(0xD3); OLEDDISPLAY_Transfer(0x00); // Set Display Offset
-  OLED_DISPLAY_Transfer(0xDA); OLEDDISPLAY_Transfer(0x12); // Set COM Pins Hardware Configuration
+  OLED_DISPLAY_Transfer(0xD3); OLED_DISPLAY_Transfer(0x00); // Set Display Offset
+  OLED_DISPLAY_Transfer(0xDA); OLED_DISPLAY_Transfer(0x12); // Set COM Pins Hardware Configuration
 
-  OLED_DISPLAY_Transfer(0xD5); OLEDDISPLAY_Transfer(0x80); // Set Display Clock
-  OLED_DISPLAY_Transfer(0xD9); OLEDDISPLAY_Transfer(0xF1); // Set Pre-charge Period
-  OLED_DISPLAY_Transfer(0xDB); OLEDDISPLAY_Transfer(0x40); // Set VCOMH Deselect Level
-  OLED_DISPLAY_Transfer(0x8D); OLEDDISPLAY_Transfer(0x14); // Charge Pump Setting
+  OLED_DISPLAY_Transfer(0xD5); OLED_DISPLAY_Transfer(0x80); // Set Display Clock
+  OLED_DISPLAY_Transfer(0xD9); OLED_DISPLAY_Transfer(0xF1); // Set Pre-charge Period
+  OLED_DISPLAY_Transfer(0xDB); OLED_DISPLAY_Transfer(0x40); // Set VCOMH Deselect Level
+  OLED_DISPLAY_Transfer(0x8D); OLED_DISPLAY_Transfer(0x14); // Charge Pump Setting
 
   OLED_DISPLAY_Transfer(0xAF);                     // Set Display ON
   
@@ -307,7 +307,7 @@ OLED_DISPLAY_WriteChar(char ch)
       segPattern = pgm_read_byte(&fontInfo.font[charLocation+(charSeg*fontInfo.height+charPag)]);
       OLED_DISPLAY_Transfer(segPattern);
     }
-    OLEDDISPLAY_TransferEnd();
+    OLED_DISPLAY_TransferEnd();
   }
 }
 
