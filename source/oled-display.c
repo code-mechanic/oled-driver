@@ -166,7 +166,7 @@ const unsigned char Segment_25x40[] PROGMEM= {
 /* Private functions ---------------------------------------------------------*/
 
 static void
-OLEDDISPLAY_TransferMode(oledDisplayMode_et cmd)
+OLED_DISPLAY_TransferMode(oledDisplayMode_et cmd)
 {
   I2C_Start();
   I2C_Write(OLED_12C_ADDRESS);
@@ -181,52 +181,52 @@ OLEDDISPLAY_TransferMode(oledDisplayMode_et cmd)
 }
 
 static inline void
-OLEDDISPLAY_Transfer(uint8_t data)
+OLED_DISPLAY_Transfer(uint8_t data)
 {
   I2C_Write(data);
 }
 
 static inline void
-OLEDDISPLAY_TransferEnd()
+OLED_DISPLAY_TransferEnd()
 {
   I2C_Stop();
 }
 
 
 void
-OLEDDISPLAY_Init()
+OLED_DISPLAY_Init()
 {
-  OLEDDISPLAY_TransferMode(OLEDDIAPLY_MODE_COMMAND);
+  OLED_DISPLAY_TransferMode(OLEDDIAPLY_MODE_COMMAND);
   
-  OLEDDISPLAY_Transfer(0xAE);                      // Set Display OFF
-  OLEDDISPLAY_Transfer(0x81);OLEDDISPLAY_Transfer(0xCF); // Set Contrast Control
-  OLEDDISPLAY_Transfer(0xA4);                     // Entire Display ON
-  OLEDDISPLAY_Transfer(0xA6);                     // Set Normal
+  OLED_DISPLAY_Transfer(0xAE);                      // Set Display OFF
+  OLED_DISPLAY_Transfer(0x81);OLED_DISPLAY_Transfer(0xCF); // Set Contrast Control
+  OLED_DISPLAY_Transfer(0xA4);                     // Entire Display ON
+  OLED_DISPLAY_Transfer(0xA6);                     // Set Normal
 
-  OLEDDISPLAY_Transfer(0x20); OLEDDISPLAY_Transfer(0x02); // Set Memory Addressing Mode
-  OLEDDISPLAY_Transfer(0x00);                     // Set Lower Column
-  OLEDDISPLAY_Transfer(0x10);                     // Set Higher Column
-  OLEDDISPLAY_Transfer(0xB0);                     // Set Page Start
+  OLED_DISPLAY_Transfer(0x20); OLED_DISPLAY_Transfer(0x02); // Set Memory Addressing Mode
+  OLED_DISPLAY_Transfer(0x00);                     // Set Lower Column
+  OLED_DISPLAY_Transfer(0x10);                     // Set Higher Column
+  OLED_DISPLAY_Transfer(0xB0);                     // Set Page Start
 
-  OLEDDISPLAY_Transfer(0x40);                     // Set Display Start Line
-  OLEDDISPLAY_Transfer(0xA1);                     // Set Segment Re-map
-  OLEDDISPLAY_Transfer(0xA8); OLEDDISPLAY_Transfer(0x3F); // Set Multiplex Ratio
-  OLEDDISPLAY_Transfer(0xC8);                     // Set COM Output
-  OLEDDISPLAY_Transfer(0xD3); OLEDDISPLAY_Transfer(0x00); // Set Display Offset
-  OLEDDISPLAY_Transfer(0xDA); OLEDDISPLAY_Transfer(0x12); // Set COM Pins Hardware Configuration
+  OLED_DISPLAY_Transfer(0x40);                     // Set Display Start Line
+  OLED_DISPLAY_Transfer(0xA1);                     // Set Segment Re-map
+  OLED_DISPLAY_Transfer(0xA8); OLED_DISPLAY_Transfer(0x3F); // Set Multiplex Ratio
+  OLED_DISPLAY_Transfer(0xC8);                     // Set COM Output
+  OLED_DISPLAY_Transfer(0xD3); OLED_DISPLAY_Transfer(0x00); // Set Display Offset
+  OLED_DISPLAY_Transfer(0xDA); OLED_DISPLAY_Transfer(0x12); // Set COM Pins Hardware Configuration
 
-  OLEDDISPLAY_Transfer(0xD5); OLEDDISPLAY_Transfer(0x80); // Set Display Clock
-  OLEDDISPLAY_Transfer(0xD9); OLEDDISPLAY_Transfer(0xF1); // Set Pre-charge Period
-  OLEDDISPLAY_Transfer(0xDB); OLEDDISPLAY_Transfer(0x40); // Set VCOMH Deselect Level
-  OLEDDISPLAY_Transfer(0x8D); OLEDDISPLAY_Transfer(0x14); // Charge Pump Setting
+  OLED_DISPLAY_Transfer(0xD5); OLED_DISPLAY_Transfer(0x80); // Set Display Clock
+  OLED_DISPLAY_Transfer(0xD9); OLED_DISPLAY_Transfer(0xF1); // Set Pre-charge Period
+  OLED_DISPLAY_Transfer(0xDB); OLED_DISPLAY_Transfer(0x40); // Set VCOMH Deselect Level
+  OLED_DISPLAY_Transfer(0x8D); OLED_DISPLAY_Transfer(0x14); // Charge Pump Setting
 
-  OLEDDISPLAY_Transfer(0xAF);                     // Set Display ON
+  OLED_DISPLAY_Transfer(0xAF);                     // Set Display ON
   
-  OLEDDISPLAY_TransferEnd();
+  OLED_DISPLAY_TransferEnd();
 }
 
 static void 
-OLEDDISPLAY_Pointer(uint8_t seg, uint8_t pag)
+OLED_DISPLAY_Pointer(uint8_t seg, uint8_t pag)
 {
   uint8_t low_column;
   uint8_t hig_column;
@@ -237,15 +237,15 @@ OLEDDISPLAY_Pointer(uint8_t seg, uint8_t pag)
   pag = (pag & 0b00000111);
   pag = (pag | 0b10110000);
   
-  OLEDDISPLAY_TransferMode(OLEDDIAPLY_MODE_COMMAND);
-  OLEDDISPLAY_Transfer(low_column); /* Set Lower Column  */
-  OLEDDISPLAY_Transfer(hig_column); /* Set Higher Column */
-  OLEDDISPLAY_Transfer(pag);        /* Set Page Start    */
-  OLEDDISPLAY_TransferEnd();
+  OLED_DISPLAY_TransferMode(OLEDDIAPLY_MODE_COMMAND);
+  OLED_DISPLAY_Transfer(low_column); /* Set Lower Column  */
+  OLED_DISPLAY_Transfer(hig_column); /* Set Higher Column */
+  OLED_DISPLAY_Transfer(pag);        /* Set Page Start    */
+  OLED_DISPLAY_TransferEnd();
 }
 
 void 
-OLEDDISPLAY_SetPointer(uint8_t seg, uint8_t pag)
+OLED_DISPLAY_SetPointer(uint8_t seg, uint8_t pag)
 {
   
   oledDisaply.pag = pag;
@@ -255,27 +255,27 @@ OLEDDISPLAY_SetPointer(uint8_t seg, uint8_t pag)
 }
 
 void 
-OLEDDISPLAY_FillScreen(uint8_t pattern)
+OLED_DISPLAY_FillScreen(uint8_t pattern)
 {
   uint8_t pag;
   uint8_t seg;
   
   for(pag = 0; pag < 8; pag++)
   {
-    OLEDDISPLAY_SetPointer(0, pag);
+    OLED_DISPLAY_SetPointer(0, pag);
 
-    OLEDDISPLAY_TransferMode(OLEDDISAPLY_MODE_RAMDATA);
+    OLED_DISPLAY_TransferMode(OLEDDISAPLY_MODE_RAMDATA);
     for(seg = 0; seg < 128; seg++)
     {
-      OLEDDISPLAY_Transfer(pattern);
+      OLED_DISPLAY_Transfer(pattern);
     }
-    OLEDDISPLAY_TransferEnd();
+    OLED_DISPLAY_TransferEnd();
   }
 }
 
 
 void
-OLEDDISPLAY_FontSelect(const unsigned char* font, 
+OLED_DISPLAY_FontSelect(const unsigned char* font, 
                        uint8_t width, 
                        uint8_t height,
                        uint8_t startChar,
@@ -290,7 +290,7 @@ OLEDDISPLAY_FontSelect(const unsigned char* font,
 }
 
 void 
-OLEDDISPLAY_WriteChar(char ch)
+OLED_DISPLAY_WriteChar(char ch)
 {
   uint8_t charSeg;
   uint8_t charPag;
@@ -300,26 +300,26 @@ OLEDDISPLAY_WriteChar(char ch)
   charLocation = (ch - fontInfo.startChar) * (fontInfo.width * fontInfo.height);
   for (charPag = 0; charPag < fontInfo.height; charPag++)
   {
-    OLEDDISPLAY_Pointer(oledDisaply.seg, oledDisaply.pag + charPag);  
-    OLEDDISPLAY_TransferMode(OLEDDISAPLY_MODE_RAMDATA);
+    OLED_DISPLAY_Pointer(oledDisaply.seg, oledDisaply.pag + charPag);  
+    OLED_DISPLAY_TransferMode(OLEDDISAPLY_MODE_RAMDATA);
     for(charSeg = 0; charSeg < fontInfo.width; charSeg++)
     {
       segPattern = pgm_read_byte(&fontInfo.font[charLocation+(charSeg*fontInfo.height+charPag)]);
-      OLEDDISPLAY_Transfer(segPattern);
+      OLED_DISPLAY_Transfer(segPattern);
     }
-    OLEDDISPLAY_TransferEnd();
+    OLED_DISPLAY_TransferEnd();
   }
 }
 
 void
-OLEDDISPLAY_WriteString(char* str)
+OLED_DISPLAY_WriteString(char* str)
 {
   uint8_t ch = 0;
   
   while(str[ch] != '\0')
   {
-    OLEDDISPLAY_WriteChar(str[ch]);
-    OLEDDISPLAY_SetPointer(oledDisaply.seg + fontInfo.width, oledDisaply.pag);
+    OLED_DISPLAY_WriteChar(str[ch]);
+    OLED_DISPLAY_SetPointer(oledDisaply.seg + fontInfo.width, oledDisaply.pag);
     ch++;
   }
 }
